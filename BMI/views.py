@@ -26,10 +26,19 @@ def homePageView(request):
             New_weight = weight * 0.45
             Og_bmi = New_weight/New_height ** 2
             bmi = round(Og_bmi,1)
+            statement = ''
+            if bmi<18.5: 
+                statement = 'Underweight'
+            elif 18.5<= bmi and bmi <=24.9: 
+                statement = 'NormalWeight'
+            elif 25.0<=bmi and bmi<=29.9: 
+                statement = 'Overweight'
+            elif 30<=bmi: 
+                statement = 'Obese'
             #form.save()
             print("form", form.cleaned_data)
             context['message'] = 'Data saved.'
-            return render(request, 'home.html', {'form':form, 'bmi':bmi})
+            return render(request, 'home.html', {'form':form, 'bmi':bmi, 'statement':statement})
     return render(request, "home.html", context)
 
 
